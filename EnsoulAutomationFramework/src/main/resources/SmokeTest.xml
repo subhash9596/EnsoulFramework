@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Default suite">
+	<test thread-count="5" verbose="2" name="Default test">
+		<classes>
+			<class name="com.katalyst.ensoul.tests.LoginTest" />
+			<class name="com.katalyst.ensoul.tests.AddEmployerTest" />
+			<class name="com.katalyst.ensoul.tests.EmployerDashboardTest" />
+			<class name="com.katalyst.ensoul.tests.ClientRepresentativeTest" />
+			<class name="com.katalyst.ensoul.tests.SetAuthorizationTest" />
+			<class name="com.katalyst.ensoul.tests.ManageUserTest" />
+			<class name="com.katalyst.ensoul.tests.EmployeeDashboardTest" />
+			<class name="com.katalyst.ensoul.tests.RegisterLifeEventTest" />
+			<class name="com.katalyst.ensoul.tests.YourCurrentBenefitsTest" />
+			<class name="com.katalyst.ensoul.tests.EnrollWithBenefitsTest" />
+		</classes>
+	</test>
+</suite>

@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='utf-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='EEEE, MMMM dd, yyyy, hh:mm a '('zzz')''/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css' />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports-java/b4a58fcfd1e137bd9287244035a7c80d3d73b3af/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>Extent Report Demo</title>
+
+	<style type='text/css'>
+	</style>
+</head>
+
+	<body class='extent standard default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'>Test Report</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>Monday, January 27, 2020, 03:53 PM (IST)</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>3.1.5</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Tests</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>7</span> test(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>10</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Tests</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>login To Application</span>
+						<span class='test-time'>Monday, January 27, 2020, 03:53 PM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, January 27, 2020, 03:53 PM (IST)</span>
+	<span class='label end-time'>Monday, January 27, 2020, 03:53 PM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 49s+426ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:53:57 PM</td>
+					<td class='step-details'>123456 Entered password</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:53:59 PM</td>
+					<td class='step-details'>Clicked on login button</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:53:59 PM</td>
+					<td class='step-details'><span class='label white-text green'>LoginToApplication PASSED </span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered username_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered username_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered username_Fail.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>ClickToBenefits</span>
+						<span class='test-time'>Monday, January 27, 2020, 03:54 PM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, January 27, 2020, 03:54 PM (IST)</span>
+	<span class='label end-time'>Monday, January 27, 2020, 03:55 PM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 30s+52ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:55:31 PM</td>
+					<td class='step-details'><span class='label white-text green'>ClickToBenefits PASSED </span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Benefits Icon_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Benefits Icon_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Benefits Icon_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Error while clicking on the Benefits iconInvalid argument_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Error while clicking on the Benefits iconInvalid argument_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Error while clicking on the Benefits iconInvalid argument_Fail.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>Add Register Life Event</span>
+						<span class='test-time'>Monday, January 27, 2020, 03:55 PM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, January 27, 2020, 03:55 PM (IST)</span>
+	<span class='label end-time'>Monday, January 27, 2020, 03:59 PM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 33s+274ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>3:59:05 PM</td>
+					<td class='step-details'><span class='label white-text green'>AddRegisterLifeEvent PASSED </span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Register life event_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Register life event_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Register life event_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Add button to register life event_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Add button to register life event_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Add button to register life event_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the life event dd_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the life event dd_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the life event dd_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered the _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered the _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered the _Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered the Occured on date_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered the Occured on date_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered the Occured on date_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\entered Effective Date_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\entered Effective Date_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\entered Effective Date_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the submit button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the submit button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the submit button_Fail.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>View Your Current Benefits</span>
+						<span class='test-time'>Monday, January 27, 2020, 03:59 PM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, January 27, 2020, 03:59 PM (IST)</span>
+	<span class='label end-time'>Monday, January 27, 2020, 04:03 PM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 4m 32s+67ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:03:38 PM</td>
+					<td class='step-details'><span class='label white-text green'>ClickonYourCurrentBenefits PASSED </span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Dashborad link_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Dashborad link_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Dashborad link_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the benefits_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the benefits_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the benefits_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Your current benefits_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Your current benefits_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Your current benefits_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Email button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Email button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Email button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Cleared the email address field_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Cleared the email address field_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Cleared the email address field_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Email Address_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Email Address_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Email Address_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the SendEmail button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the SendEmail button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the SendEmail button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the successful message _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the successful message _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the successful message _Fail.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>Enroll With Benefits</span>
+						<span class='test-time'>Monday, January 27, 2020, 04:03 PM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, January 27, 2020, 04:03 PM (IST)</span>
+	<span class='label end-time'>Monday, January 27, 2020, 04:08 PM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 4m 25s+700ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:08:03 PM</td>
+					<td class='step-details'><span class='label white-text green'>ClicktoEnrollWithBenefits PASSED </span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the katalyst logo_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the katalyst logo_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the katalyst logo_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the benefits_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the benefits_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the benefits_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Enroll With Benefits_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Enroll With Benefits_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Enroll With Benefits_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Moved to Page Enroll with benefits_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Moved to Page Enroll with benefits_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Moved to Page Enroll with benefits_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the close Icon_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the close Icon_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the close Icon_Fail.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>addEmployer</span>
+						<span class='test-time'>Monday, January 27, 2020, 04:08 PM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, January 27, 2020, 04:08 PM (IST)</span>
+	<span class='label end-time'>Monday, January 27, 2020, 04:13 PM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 5m 48s+752ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:09:24 PM</td>
+					<td class='step-details'>DaimlerTest47 Entered user id for Employer credential</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:13:52 PM</td>
+					<td class='step-details'><span class='label white-text green'>addEmployer PASSED </span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on Add Employer Icon_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on Add Employer Icon_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on Add Employer Icon_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Employer name_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Employer name_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Employer name_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Tax Id of employer_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Tax Id of employer_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Tax Id of employer_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Street 1 of employer_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Street 1 of employer_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Street 1 of employer_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Street 2 of employer_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Street 2 of employer_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Street 2 of employer_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered City employer_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered City employer_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered City employer_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select Country_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select Country_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select Country_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select State_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select State_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select State_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Zip of employer_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Zip of employer_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Zip of employer_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\India_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\India_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\India_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Save & Next Basic Details Button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Save & Next Basic Details Button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Save & Next Basic Details Button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Immigration Checkbox_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Immigration Checkbox_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Immigration Checkbox_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Timesheet Checkbox_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Timesheet Checkbox_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Timesheet Checkbox_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Travel Portal Checkbox_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Travel Portal Checkbox_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Travel Portal Checkbox_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on Save Next button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on Save Next button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on Save Next button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Designation_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Designation_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Designation_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative First Name_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative First Name_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative First Name_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Last Name_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Last Name_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Last Name_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Street Address 1_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Street Address 1_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Street Address 1_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Street Address2 _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Street Address2 _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Street Address2 _Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative City Name_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative City Name_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative City Name_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select State from drop down_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select State from drop down_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select State from drop down_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Zip Name_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Zip Name_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Zip Name_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Phone number_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Phone number_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Phone number_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Extension number_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Extension number_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Extension number_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Cell number_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Cell number_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Cell number_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Email number_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Email number_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Entered Client Representative Email number_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Save & Next CR Details button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Save & Next CR Details button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked Save & Next CR Details button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on user name radio button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on user name radio button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on user name radio button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on verify username button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on verify username button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on verify username button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on create user id button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on create user id button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on create user id button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on skip & next button of employer credential _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on skip & next button of employer credential _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on skip & next button of employer credential _Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on next button general setting _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on next button general setting _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on next button general setting _Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on authorize button of employer authorization _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on authorize button of employer authorization _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on authorize button of employer authorization _Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on skip & next button of employer authorization _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on skip & next button of employer authorization _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on skip & next button of employer authorization _Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on report setting button of employer _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on report setting button of employer _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on report setting button of employer _Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Application configuration click here link_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Application configuration click here link_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Application configuration click here link_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click here for broker limnk_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click here for broker limnk_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click here for broker limnk_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save relabel employee information in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save relabel employee information in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save relabel employee information in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on drop down items of employee information in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on drop down items of employee information in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on drop down items of employee information in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Add fields save and finish button of employee information in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Add fields save and finish button of employee information in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Add fields save and finish button of employee information in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save relabel button of employment information in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save relabel button of employment information in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save relabel button of employment information in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Drop down items of employment information in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Drop down items of employment information in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Drop down items of employment information in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Add fields save and finish of employment information in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Add fields save and finish of employment information in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Add fields save and finish of employment information in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on next button of Home contact in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on next button of Home contact in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on next button of Home contact in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip add fields button of Home contact in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip add fields button of Home contact in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip add fields button of Home contact in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on relabel work contact Next button of  contact in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on relabel work contact Next button of  contact in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on relabel work contact Next button of  contact in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip add permenant field of work contact in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip add permenant field of work contact in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip add permenant field of work contact in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button of work contact in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button of work contact in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button of work contact in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Save & Finish button of workc ontact in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Save & Finish button of workc ontact in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Save & Finish button of workc ontact in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Save dependent relabel info in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Save dependent relabel info in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Save dependent relabel info in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next dependent Drop down info in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next dependent Drop down info in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next dependent Drop down info in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save and finish dependent Drop down info in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save and finish dependent Drop down info in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save and finish dependent Drop down info in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button relabel info of payroll in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button relabel info of payroll in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button relabel info of payroll in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button drop down items info of payroll in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button drop down items info of payroll in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Next button drop down items info of payroll in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip  button add fields info of payroll in HR lite_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip  button add fields info of payroll in HR lite_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on Skip  button add fields info of payroll in HR lite_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Monthly payroll Checkbox_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Monthly payroll Checkbox_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Select Monthly payroll Checkbox_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly calendar name_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly calendar name_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly calendar name_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly Payroll begin date_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly Payroll begin date_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly Payroll begin date_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly payroll end date_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly payroll end date_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly payroll end date_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly payroll check date_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly payroll check date_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Monthly payroll check date_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select Check Day Of Month  from drop down list_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select Check Day Of Month  from drop down list_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\select Check Day Of Month  from drop down list_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save and finish payroll button_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save and finish payroll button_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on save and finish payroll button_Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on EnSoul Logo_Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on EnSoul Logo_Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Click on EnSoul Logo_Fail.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>Employer Dashboard</span>
+						<span class='test-time'>Monday, January 27, 2020, 04:13 PM (IST)</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Monday, January 27, 2020, 04:13 PM (IST)</span>
+	<span class='label end-time'>Monday, January 27, 2020, 04:14 PM (IST)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 28s+791ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:14:21 PM</td>
+					<td class='step-details'><span class='label white-text green'>ClickToBenefits PASSED </span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Employer Dashboard _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Employer Dashboard _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Clicked on the Employer Dashboard _Fail.png'></li>
+								<li><img data-featherlight='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Get text of Employer Icon _Fail.png' width='10%' src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Get text of Employer Icon _Fail.png' data-src='E:\FrameWorks\EnSoul-POM\EnsoulAutomation\Reports\20200127155246_EnsoulReport\Screenshots\Get text of Employer Icon _Fail.png'></li>
+							</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+</div>
+<!-- test view -->
+<!-- category view -->
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Tests
+					<div class='panel-lead'>7</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>10</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>Monday, January 27, 2020, 03:53 PM (IST)</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>Monday, January 27, 2020, 04:14 PM (IST)</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>0h 21m 12s+106ms</div>
+				</div>
+			</div>
+			<div class='col s4'>
+				<div class='card-panel dashboard-environment'>
+					<span class='right label cyan white-text'>Environment</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Value</th>
+						</tr>
+							<tr>
+								<td>Browser</td>
+								<td>firefox</td>
+							</tr>
+							<tr>
+								<td>Environment</td>
+								<td>QA</td>
+							</tr>
+							<tr>
+								<td>Project Name</td>
+								<td>Ensoul</td>
+							</tr>
+							<tr>
+								<td>Suite</td>
+								<td>SmokeTest</td>
+							</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 7,
+				failParent: 0,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 0,
+				exceptionsParent: 0,
+				
+				passChild: 10,
+				failChild: 0,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 0,
+				infoChild: 0,
+				exceptionsChild: 0,
+				
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		
+			<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+ 		<script type='text/javascript'>
+ 		</script>
+	</body>
+	
+</html>
